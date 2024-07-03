@@ -35,9 +35,17 @@ agent.write_envfile("database.env", postgres)
 SECRET_KEY = secrets.token_hex(32)
 UTILS_SECRET = secrets.token_hex(32)
 DATABASE_URL = f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
-REDIS_URL="redis://localhost:6379"
+REDIS_URL="redis://redis-app:6379"
 
+app_env = {
+    'SECRET_KEY': SECRET_KEY,
+    'UTILS_SECRET': UTILS_SECRET,
+    'DATABASE_URL': DATABASE_URL,
+    'REDIS_URL': REDIS_URL,
+}
 
+agent.write_envfile("secrets.env", app_env)
 
 # just before starting systemd unit
-#agent.dump_env()
+# agent.dump_env()
+
