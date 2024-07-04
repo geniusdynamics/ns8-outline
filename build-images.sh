@@ -45,7 +45,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:15.5-alpine3.19 docker.io/redis:7 docker.getoutline.com/outlinewiki/outline:latest " \
+    --label="org.nethserver.images=docker.io/postgres:15.5-alpine3.19 docker.io/redis:7 outlinewiki/outline:0.78.0-0" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
