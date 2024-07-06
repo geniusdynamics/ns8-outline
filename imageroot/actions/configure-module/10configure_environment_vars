@@ -42,13 +42,5 @@ app_config = {
 }
 agent.write_envfile("app.env", app_config)
 
-
-
-app_env = {
-    'DATABASE_URL': DATABASE_URL,
-    'REDIS_URL': REDIS_URL,
-}
-
-agent.write_envfile("app.env", app_env)
 # just before starting systemd unit
 #agent.dump_env()
