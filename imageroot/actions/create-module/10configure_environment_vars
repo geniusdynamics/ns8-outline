@@ -14,14 +14,13 @@ import secrets
 # If parsing fails, output everything to stderr
 data = json.load(sys.stdin)
 
-PASSWORD = secrets.token_urlsafe(16)
+
 SECRET_KEY = secrets.token_hex(32)
 UTILS_SECRET = secrets.token_hex(32)
 
 app_env = {
     'SECRET_KEY': SECRET_KEY,
     'UTILS_SECRET': UTILS_SECRET,
-    'PASSWORD': PASSWORD,
     'DATABASE_URL': DATABASE_URL,
     'REDIS_URL': REDIS_URL,
 }
