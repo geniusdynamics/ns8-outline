@@ -24,7 +24,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/outline-app.pid \
     --env-file=%S/state/secrets.env \
     --env-file=%S/state/app.env \
     --volume storage-data:/var/lib/outline/data:Z \
-    ${OUTLINE_IMAGE}
+    ${OUTLINE_IMAGE} sh -c "yarn --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/outline-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP outline-app
 SyslogIdentifier=%u
