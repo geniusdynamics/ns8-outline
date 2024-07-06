@@ -13,12 +13,40 @@ import agent
 # If parsing fails, output everything to stderr
 data = json.load(sys.stdin)
 
+# Configure Database
+POSTGRES_DB = data.get('POSTGRES_DB', 'outline')
+POSTGRES_USER = data.get('POSTGRES_USER', 'outline')
+POSTGRES_PASSWORD = data.get('POSTGRES_PASSWORD', PASSWORD)
+POSTGRES_HOST = data.get('POSTGRES_HOST', 'postgresql-app')
+POSTGRES_PORT = data.get('POSTGRES_PORT', 5432)
+
+postgres = {
+    'POSTGRES_DB': POSTGRES_DB,
+    'POSTGRES_USER': POSTGRES_USER,
+    'POSTGRES_PASSWORD': POSTGRES_PASSWORD,
+    'POSTGRES_HOST': POSTGRES_HOST,
+    'POSTGRES_PORT': POSTGRES_PORT,
+}
+agent.write_envfile("database.env", postgres)
+
 #This is specific to you module, so you need to change it accordingly.
+DATABASE_URL = f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+REDIS_URL="redis://redis-app:6379"
 HOST = data.get("host")
 app_config = {
     "URL": "https://"+HOST,
+    'DATABASE_URL': DATABASE_URL,
+    'REDIS_URL': REDIS_URL,
 }
 agent.write_envfile("app.env", app_config)
 
+
+
+app_env = {
+    'DATABASE_URL': DATABASE_URL,
+    'REDIS_URL': REDIS_URL,
+}
+
+agent.write_envfile("app.env", app_env)
 # just before starting systemd unit
 #agent.dump_env()
