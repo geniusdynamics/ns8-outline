@@ -39,6 +39,7 @@ app_config = {
     "URL": "https://"+HOST,
     'DATABASE_URL': DATABASE_URL,
     'REDIS_URL': REDIS_URL,
+    'PORT': PORT,
 }
 agent.write_envfile("app.env", app_config)
 
