@@ -25,7 +25,6 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgresql-app.pid \
     --volume %S/state/restore/:/docker-entrypoint-initdb.d/:Z \
     --env TZ=UTC \
     ${POSTGRES_IMAGE}
-#ExecStartPost=/usr/bin/bash -c "while ! podman  exec postgresql-app psql -U ${POSTGRES_USER} -d outline ;  do sleep 5 ; done"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postgresql-app.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/postgresql-app.ctr-id
 ExecReload=/usr/bin/podman kill -s HUP postgresql-app
