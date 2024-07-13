@@ -35,8 +35,10 @@ DATABASE_URL = f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:
 REDIS_URL="redis://redis-app:6379"
 HOST = data.get("host")
 PORT = 3000
+app_url = f"{HOST}:{PORT}"
+
 app_config = {
-    "URL": "https://"+HOST,
+    "URL": f"https://{app_url}",
     'DATABASE_URL': DATABASE_URL,
     'REDIS_URL': REDIS_URL,
     'PORT': PORT,
