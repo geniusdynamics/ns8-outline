@@ -1,9 +1,13 @@
 {
   "name": "outline",
   "description": {
-    "en": "My outline module"
+    "en": "Outline is a fast knowledge base for teams, with real-time editing, search and integrations for wikis and documentation.",
+    "it": "Outline è una knowledge base veloce per i team, con modifica in tempo reale, ricerca e integrazioni per wiki e documentazione."
   },
-  "categories": [],
+  "categories": [
+    "documentation",
+    "collaboration"
+  ],
   "authors": [
     {
       "name": "Genius Dynamics",
