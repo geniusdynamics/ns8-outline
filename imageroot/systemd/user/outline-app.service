@@ -13,6 +13,8 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%E/state/environment
 WorkingDirectory=%E/state
 Restart=always
+# PostgreSQL may still be initialising: retry instead of hitting the start limit
+RestartSec=10
 TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p config
 ExecStartPre=/bin/rm -f %t/outline-app.pid %t/outline-app.ctr-id
@@ -22,7 +24,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/outline-app.pid \
     --env-file=%E/state/secrets.env \
     --env-file=%E/state/app.env \
     --volume storage-data:/var/lib/outline/data:Z \
-    ${OUTLINE_IMAGE} sh -c "yarn --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"
+    ${OUTLINE_IMAGE} sh -c "node_modules/.bin/sequelize db:migrate --env=production-ssl-disabled && node build/server/index.js"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/outline-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP outline-app
 SyslogIdentifier=%u

@@ -21,8 +21,6 @@ UTILS_SECRET = secrets.token_hex(32)
 app_env = {
     'SECRET_KEY': SECRET_KEY,
     'UTILS_SECRET': UTILS_SECRET,
-    'DATABASE_URL': DATABASE_URL,
-    'REDIS_URL': REDIS_URL,
 }
 
 agent.write_envfile("secrets.env", app_env)
