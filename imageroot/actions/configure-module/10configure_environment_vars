@@ -37,7 +37,8 @@ DATABASE_URL = f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:
 # The containers share the pod network: Redis is on 127.0.0.1
 REDIS_URL = "redis://127.0.0.1:6379"
 HOST = data.get("host")
-PORT = 80
+# Outline runs unprivileged and cannot bind port 80: the pod publishes 3000
+PORT = 3000
 app_url = f"https://{HOST}"
 
 app_config = {
